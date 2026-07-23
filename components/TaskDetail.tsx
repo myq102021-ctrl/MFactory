@@ -340,7 +340,7 @@ export const TaskDetail: React.FC<TaskDetailProps> = ({ taskId, onBack }) => {
 
     const parentProgress = isSuccess ? 100 : isRunning ? 68 : isFailed ? 45 : 0;
     const parentEndTime = isSuccess ? '2026-01-16 14:35:10' : '-';
-    const parentStage = isSuccess ? '服务发布 (全流程完成)' : isRunning ? `正在进行 [${stageNames[Math.min(1, stageNames.length - 1)] || '正射校正'}]` : isFailed ? '异常中断' : '终止';
+    const parentStage = isSuccess ? '服务发布 (全流程完成)' : isRunning ? (stageNames[Math.min(1, stageNames.length - 1)] || '波段合成') : isFailed ? '异常中断' : '终止';
 
     return {
       id: taskDataFromStorage?.id || taskId,
@@ -599,7 +599,7 @@ export const TaskDetail: React.FC<TaskDetailProps> = ({ taskId, onBack }) => {
                 <div className="bg-slate-50/60 border border-slate-100 rounded-2xl p-4 flex items-center justify-between">
                   <div>
                     <p className="text-[12px] font-bold text-slate-400">主任务 / 数据批次概览</p>
-                    <p className="text-[20px] font-black text-slate-800 mt-0.5">1 父任务 / {taskHierarchy.children?.length || 0} 条数据</p>
+                    <p className="text-[20px] font-black text-slate-800 mt-0.5">1 主任务 / {taskHierarchy.children?.length || 0} 条数据</p>
                   </div>
                   <div className="p-3 bg-blue-50 text-blue-600 rounded-xl"><Layers size={20} /></div>
                 </div>
@@ -676,9 +676,6 @@ export const TaskDetail: React.FC<TaskDetailProps> = ({ taskId, onBack }) => {
                           <div className="flex flex-col">
                             <span className="text-slate-800 font-black text-[14px] flex items-center gap-2">
                               {taskHierarchy.name}
-                              <span className="px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-[10px] font-bold border border-blue-200">
-                                父任务 (主调度)
-                              </span>
                             </span>
                             <span className="text-[11px] text-slate-400 font-normal">批次关联 {taskHierarchy.children?.length || 0} 条输入数据文件</span>
                           </div>
